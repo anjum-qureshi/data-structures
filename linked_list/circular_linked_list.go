@@ -15,14 +15,6 @@ type CircularLinkedList struct {
 	Length int
 }
 
-func (l *CircularLinkedList) isEmpty() bool {
-	return l.Head == nil
-}
-
-func (l *CircularLinkedList) increment() {
-	l.Length += 1
-}
-
 func (l *CircularLinkedList) InsertAt(position, value int) error {
 	if l.isInvalidInsert(position) {
 		return fmt.Errorf("invalid position")
@@ -68,6 +60,55 @@ func (l *CircularLinkedList) DeleteAt(position int) error {
 
 	prev.Next = curr.Next
 	return nil
+}
+
+func (l *CircularLinkedList) Exists(nodeValue int) (bool, int) {
+	currNode := l.Head
+	position := 0
+	for currNode != nil {
+		if currNode.Value == nodeValue {
+			return true, position
+		}
+		currNode = currNode.Next
+		position++
+	}
+	return false, -1
+}
+
+func (l *CircularLinkedList) Sort() {
+	current := l.Head
+	for current != nil {
+		index := current.Next
+		for index != nil {
+			if current.Value > index.Value {
+				temp := current.Value
+				current.Value = index.Value
+				index.Value = temp
+			} else {
+				index = index.Next
+			}
+		}
+		current = current.Next
+	}
+}
+
+func (l *CircularLinkedList) Reverse() *CircularLinkedList {
+	reversed := &CircularLinkedList{}
+	curr := l.Head
+	for curr != nil {
+		reversed.Head = &SNode{Value: curr.Value, Next: reversed.Head}
+		curr = curr.Next
+	}
+	l.Head.Next = curr
+	return reversed
+}
+
+func (l *CircularLinkedList) isEmpty() bool {
+	return l.Head == nil
+}
+
+func (l *CircularLinkedList) increment() {
+	l.Length += 1
 }
 
 func (l *CircularLinkedList) isInvalidDelete(position int) bool {

@@ -63,7 +63,7 @@ func (l *SinglyLinkedList) DeleteAt(position int) error {
 
 func (l *SinglyLinkedList) PrintAll() {
 	currNode := l.Head
-	if l.isEmpty() {
+	if l.IsEmpty() {
 		fmt.Println("empty linked list")
 		return
 	}
@@ -85,6 +85,14 @@ func (l *SinglyLinkedList) Exists(nodeValue int) (bool, int) {
 		position++
 	}
 	return false, -1
+}
+
+func (l *SinglyLinkedList) ElementAt(position int) int {
+	currNode := l.Head
+	for index := 1; currNode != nil && position == index; index++ {
+		currNode = currNode.Next
+	}
+	return currNode.Value
 }
 
 func (l *SinglyLinkedList) Sort() {
@@ -114,12 +122,12 @@ func (l *SinglyLinkedList) Reverse() *SinglyLinkedList {
 	return reversed
 }
 
-func (l *SinglyLinkedList) isEmpty() bool {
+func (l *SinglyLinkedList) IsEmpty() bool {
 	return l.Head == nil
 }
 
 func (l *SinglyLinkedList) addAtHead(position int) bool {
-	return position == 1 || l.isEmpty()
+	return position == 1 || l.IsEmpty()
 }
 
 func (l *SinglyLinkedList) isNegativeIndex(position int) bool {
