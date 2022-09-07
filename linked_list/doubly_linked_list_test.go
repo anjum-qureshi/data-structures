@@ -115,6 +115,12 @@ func TestDoublyLinkedList_DeleteAt_ErrorWhenPositionIsGreaterThanLength(t *testi
 	assert.Exactly(t, expected, list)
 }
 
+func TestDoublyLinkedList_DeleteAt_WhenLinkedListHasOneElement(t *testing.T) {
+	list := createDoublyLinkedList(1)
+	list.DeleteAt(1)
+	assert.Exactly(t, &ll.DoublyLinkedList{}, list)
+}
+
 func TestDoublyLinkedList_Sort_ShouldSortLinkedListInAscendingOrder(t *testing.T) {
 	list := createDoublyLinkedList(5, 10, -20, 30, 0, 5, 3)
 	list.Sort()

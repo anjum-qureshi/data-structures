@@ -113,6 +113,13 @@ func TestSinglyLinkedList_DeleteAt_ErrorWhenPositionIsGreaterThanLength(t *testi
 	assert.Exactly(t, expected, list)
 }
 
+func TestSinglyLinkedList_DeleteAt_WhenListHasOnlyOneElement(t *testing.T) {
+	list := createSinglyLinkedList(10)
+	err := list.DeleteAt(1)
+	assert.NoError(t, err, "invalid error")
+	assert.Exactly(t, ll.SinglyLinkedList{}, list)
+}
+
 func createSinglyLinkedList(values ...int) ll.SinglyLinkedList {
 	list := ll.SinglyLinkedList{Length: len(values)}
 	if len(values) == 0 {

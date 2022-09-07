@@ -146,10 +146,6 @@ func (l *DoublyLinkedList) isEmpty() bool {
 	return l.Head == nil
 }
 
-func (l *DoublyLinkedList) addAtHead(position int) bool {
-	return position == 1 || l.isEmpty()
-}
-
 func (l *DoublyLinkedList) isNegativeIndex(position int) bool {
 	return position <= 0
 }
